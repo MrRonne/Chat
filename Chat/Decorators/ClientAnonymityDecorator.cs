@@ -5,6 +5,7 @@ namespace Chat.Decorators
 {
     public class ClientAnonymityDecorator : ClientBaseDecorator
     {
+        protected readonly Random Randomizer = new Random();
         protected readonly Dictionary<string, string> AnonymousNames = new Dictionary<string, string>();
 
         public ClientAnonymityDecorator(IClient client) : base(client) { }
@@ -26,7 +27,7 @@ namespace Chat.Decorators
         {
             while (true)
             {
-                var anonymousName = new Random().Next(0, int.MaxValue).ToString();
+                var anonymousName = Randomizer.Next(0, int.MaxValue).ToString();
                 if (AnonymousNames.ContainsValue(anonymousName)) continue;
                 return anonymousName;
             }
